@@ -1,7 +1,8 @@
 FLAGS=-Wall -Werror -std=gnu99 -Iinc -O0 -g
 LIBS=-lonion
 
-FILES=build/demo.o build/core/kweb.o build/elements/label.o
+FILES=build/demo.o build/core/kweb.o build/elements/primitives/label.o \
+	build/utils/vector.o build/core/kpage.o build/elements/element.o
 OUT=bin/server
 
 all: $(FILES)
@@ -13,7 +14,16 @@ build/demo.o: src/demo.c
 build/core/kweb.o: src/core/kweb.c
 	$(CC) $(FLAGS) $< -c -o $@ $(LIBS)
 
-build/elements/label.o: src/elements/label.c
+build/elements/primitives/label.o: src/elements/primitives/label.c
+	$(CC) $(FLAGS) $< -c -o $@ $(LIBS)
+
+build/utils/vector.o: src/utils/vector.c
+	$(CC) $(FLAGS) $< -c -o $@ $(LIBS)
+
+build/core/kpage.o: src/core/kpage.c
+	$(CC) $(FLAGS) $< -c -o $@ $(LIBS)
+
+build/elements/element.o: src/elements/element.c
 	$(CC) $(FLAGS) $< -c -o $@ $(LIBS)
 
 run: all

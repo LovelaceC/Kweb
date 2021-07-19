@@ -3,10 +3,16 @@
 int
 home (void *p, onion_request *req, onion_response *res)
 {
-  struct label hello_label = label_create ("Hello world from C");
-  label_draw (&hello_label, res);
+  struct kpage page = kpage_create ();
 
-  label_free (&hello_label);
+  kpage_add_simple_element (&page, ELEMENT_LABEL, "Hello world from C!");
+  kpage_add_simple_element (&page, ELEMENT_LABEL,
+                            "The next element is now an empty label.");
+  kpage_add_simple_element (&page, ELEMENT_LABEL, NULL);
+
+  kpage_render (&page, res);
+
+  kpage_free (&page);
   return OCS_PROCESSED;
 }
 
