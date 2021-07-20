@@ -11,6 +11,9 @@ element_create (enum element_types type, void *content)
   element->content = content;
   element->children = vector_create ();
 
+  element->class = NULL;
+  element->id = NULL;
+
   return element;
 }
 
@@ -26,6 +29,7 @@ element_draw (struct element *element, onion_response *res)
       label_draw_bold (element, res);
       break;
     case ELEMENT_DIVISION:
+      division_draw (element, res);
       break;
     default:
       break;
@@ -57,6 +61,24 @@ element_add_child_simple (struct element *parent, enum element_types type,
 }
 
 void
+element_set_class (struct element *element, const char *class)
+{
+  // Should kweb just not allocate memory?
+  size_t class_len = strlen (class);
+  element->class = malloc (sizeof (char) * class_len);
+  strncpy (element->class, class, class_len);
+}
+
+void
+element_set_id (struct element *element, const char *id)
+{
+  // Should kweb just not allocate memory?
+  size_t id_len = strlen (id);
+  element->id = malloc (sizeof (char) * id_len);
+  strncpy (element->id, id, id_len);
+}
+
+void
 element_free (struct element *element)
 {
   for (int i = 0; i < element->children.length; i++)
@@ -68,6 +90,13 @@ element_free (struct element *element)
     }
 
   vector_free (&element->children);
+
+  if (element->class != NULL)
+    {
+      free (element->class);
+      element->class = NULL;
+    }
+
   element->parent = NULL;
   element->content = NULL;
 }

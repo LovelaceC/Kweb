@@ -72,6 +72,9 @@ struct element
   void *content;
 
   struct vector children;
+
+  char *class; // Class of the element
+  char *id;    // Class of the ID
 };
 
 struct element *element_create (enum element_types type, void *content);
@@ -80,10 +83,17 @@ void element_draw_nested (struct vector *elements, onion_response *res);
 void element_add_child (struct element *parent, struct element *child);
 void element_add_child_simple (struct element *parent, enum element_types type,
                                void *content);
+
+void element_set_class (struct element *element, const char *class);
+void element_set_id (struct element *element, const char *id);
+
 void element_free (struct element *element);
 
 // elements/primitives/label.h
 void label_draw (struct element *label, onion_response *res);
 void label_draw_bold (struct element *label, onion_response *res);
+
+// elements/primitives/division.h
+void division_draw (struct element *division, onion_response *res);
 
 #endif
