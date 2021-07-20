@@ -39,7 +39,7 @@ struct kweb
   int timeout;
 };
 
-struct kweb kweb_init (int timeout, char *hostname);
+struct kweb kweb_init (int timeout, const char *hostname, const char *port);
 void kweb_add_page (struct kweb *k, const char *regex, void *fptr);
 void kweb_listen (struct kweb *k);
 

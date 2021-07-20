@@ -28,11 +28,11 @@ home (void *p, onion_request *req, onion_response *res)
 int
 main (int main, char **argv)
 {
-  struct kweb k = kweb_init (5000, "0.0.0.0");
+  struct kweb k = kweb_init (5000, "0.0.0.0", "15000");
 
   kweb_add_page (&k, "", home);
 
-  printf ("Check this website at: 0.0.0.0:8080\n");
+  printf ("Check this website at: 0.0.0.0:15000\n");
 
   kweb_listen (&k);
 }
