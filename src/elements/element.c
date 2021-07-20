@@ -49,8 +49,8 @@ element_add_child (struct element *parent, struct element *child)
 }
 
 void
-element_add_child_easy (struct element *parent, enum element_types type,
-                        void *content)
+element_add_child_simple (struct element *parent, enum element_types type,
+                          void *content)
 {
   struct element *el = element_create (type, content);
   element_add_child (parent, el);
