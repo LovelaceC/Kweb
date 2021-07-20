@@ -23,17 +23,14 @@ A simple demo will run, you can visit it going to localhost:8080
 I literally started working on this today (Jul 19 01:57:48 2021) and it barely
 has stuff, I am really looking forward to make this grow and more usable.
 
+- Page meta (name, author, description, language, etcetera - could be done
+through a META element?)
+- Classes and IDs for elements
+- Support for styles (CSS)
 - More elements. So far it only supports labels
-- Child elements. So we can get outputs like:
-
-  ```html
-<div>
-<p>A child</p>
-<p>Another child</p>
-</div>
-  ```
-
 - Documentation
 - Abstractions for certain useful functionalities, such as filesystem
 management, sockets, and that kind of stuff.
 - Database support.
+- File format supports (images, videos, etcetera - as it runs its own server)
+- Think about more ToDo's lmao
