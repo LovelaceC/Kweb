@@ -31,6 +31,12 @@ element_draw (struct element *element, onion_response *res)
     case ELEMENT_DIVISION:
       division_draw (element, res);
       break;
+    case ELEMENT_LIST:
+      list_draw (element, res);
+      break;
+    case ELEMENT_LIST_CHILD:
+      list_draw_child (element, res);
+      break;
     default:
       break;
     }
@@ -76,6 +82,16 @@ element_set_id (struct element *element, const char *id)
   size_t id_len = strlen (id);
   element->id = malloc (sizeof (char) * id_len);
   strncpy (element->id, id, id_len);
+}
+
+void
+element_draw_opening (struct element *element, const char *tag,
+                      onion_response *res)
+{
+  onion_response_printf (res, "<%s class=\"%s\" id=\"%s\">\n",
+                         tag != NULL ? tag : "",
+                         element->class != NULL ? element->class : "",
+                         element->id != NULL ? element->id : "");
 }
 
 void

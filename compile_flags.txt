@@ -2,5 +2,6 @@
 -Werror
 -std=gnu99
 -Iinc
+-fPIC
 -O0
 -g

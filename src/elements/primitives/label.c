@@ -10,13 +10,11 @@ label_draw (struct element *label, onion_response *res)
       || (label->parent != NULL && label->parent->type != ELEMENT_LABEL))
     {
       should_create = 1;
-      onion_response_printf (res, "<p class=\"%s\" id=\"%s\">",
-                             label->class != NULL ? label->class : "",
-                             label->id != NULL ? label->id : "");
+      element_draw_opening (label, "p", res);
     }
 
   // Print the content
-  onion_response_printf (res, "%s",
+  onion_response_printf (res, "%s\n",
                          label->content != NULL ? (char *)label->content : "");
 
   // Children
@@ -35,9 +33,8 @@ label_draw (struct element *label, onion_response *res)
 void
 label_draw_bold (struct element *label, onion_response *res)
 {
-  onion_response_printf (res, "<b class=\"%s\" id=\"%s\">%s",
-                         label->class != NULL ? label->class : "",
-                         label->id != NULL ? label->id : "",
+  element_draw_opening (label, "b", res);
+  onion_response_printf (res, "%s\n",
                          label->content != NULL ? (char *)label->content : "");
 
   if (!vector_is_empty (&label->children))
@@ -45,5 +42,5 @@ label_draw_bold (struct element *label, onion_response *res)
       element_draw_nested (&label->children, res);
     }
 
-  onion_response_write0 (res, "</b>");
+  onion_response_write0 (res, "</b>\n");
 }

@@ -65,7 +65,9 @@ enum element_types
 {
   ELEMENT_LABEL,
   ELEMENT_BOLD_LABEL,
-  ELEMENT_DIVISION
+  ELEMENT_DIVISION,
+  ELEMENT_LIST,
+  ELEMENT_LIST_CHILD
 };
 
 struct element
@@ -91,6 +93,9 @@ void element_add_child_simple (struct element *parent, enum element_types type,
 void element_set_class (struct element *element, const char *class);
 void element_set_id (struct element *element, const char *id);
 
+void element_draw_opening (struct element *element, const char *tag,
+                           onion_response *res);
+
 void element_free (struct element *element);
 
 // elements/primitives/label.h
@@ -99,5 +104,9 @@ void label_draw_bold (struct element *label, onion_response *res);
 
 // elements/primitives/division.h
 void division_draw (struct element *division, onion_response *res);
+
+// elements/primitives/list.h
+void list_draw (struct element *list, onion_response *res);
+void list_draw_child (struct element *child, onion_response *res);
 
 #endif
