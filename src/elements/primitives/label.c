@@ -1,21 +1,45 @@
 #include <kweb.h>
 
-struct label
-label_create (char *content)
+void
+label_draw (struct element *label, onion_response *res)
 {
-  struct label label = { 0 };
-  label.content = content;
-  return label;
+  _Bool should_create = 0; // Determines if we should create a `p' tag or just
+                           // append text to an existing label (parent)
+
+  if ((label->parent == NULL)
+      || (label->parent != NULL && label->parent->type != ELEMENT_LABEL))
+    {
+      should_create = 1;
+      onion_response_write0 (res, "<p>");
+    }
+
+  // Print the content
+  onion_response_printf (res, "%s",
+                         label->content != NULL ? (char *)label->content : "");
+
+  // Children
+  if (!vector_is_empty (&label->children))
+    {
+      element_draw_nested (&label->children, res);
+    }
+
+  // Print `/p' if necessary
+  if (should_create)
+    {
+      onion_response_write0 (res, "</p>");
+    }
 }
 
 void
-label_draw (struct label *label, onion_response *res)
+label_draw_bold (struct element *label, onion_response *res)
 {
-  onion_response_printf (res, "<p>%s</p>",
-                         label->content != NULL ? label->content : "");
-}
+  onion_response_printf (res, "<b>%s",
+                         label->content != NULL ? (char *)label->content : "");
 
-void
-label_free (struct label *label)
-{
+  if (!vector_is_empty (&label->children))
+    {
+      element_draw_nested (&label->children, res);
+    }
+
+  onion_response_write0 (res, "</b>");
 }

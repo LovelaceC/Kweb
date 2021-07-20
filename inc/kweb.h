@@ -12,16 +12,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-/// ENUMS
-
-// elements/element.h
-enum element_types
-{
-  ELEMENT_LABEL,
-  ELEMENT_DIVISION
-};
-
-/// DEFS
+// Definitions go at top
+struct element;
+struct kweb;
+struct kpage;
+enum element_types;
 
 // utils/vector.h
 struct vector
@@ -32,6 +27,7 @@ struct vector
 
 struct vector vector_create ();
 void vector_add_element (struct vector *vector, void *element);
+_Bool vector_is_empty (struct vector *vector);
 void vector_free (struct vector *vector);
 
 // core/kweb.h
@@ -54,29 +50,38 @@ struct kpage
 };
 
 struct kpage kpage_create ();
+void kpage_add_element (struct kpage *page, struct element *element);
 void kpage_add_simple_element (struct kpage *page, enum element_types type,
                                void *content);
 void kpage_render (struct kpage *page, onion_response *res);
 void kpage_free (struct kpage *page);
 
 // elements/element.h
+enum element_types
+{
+  ELEMENT_LABEL,
+  ELEMENT_BOLD_LABEL,
+  ELEMENT_DIVISION
+};
+
 struct element
 {
   enum element_types type;
+
+  struct element *parent;
   void *content;
+
+  struct vector children;
 };
 
-struct element element_create (enum element_types type, void *content);
+struct element *element_create (enum element_types type, void *content);
 void element_draw (struct element *element, onion_response *res);
+void element_draw_nested (struct vector *elements, onion_response *res);
+void element_add_child (struct element *parent, struct element *child);
+void element_free (struct element *element);
 
 // elements/primitives/label.h
-struct label
-{
-  char *content;
-};
-
-struct label label_create (char *content);
-void label_draw (struct label *label, onion_response *res);
-void label_free (struct label *label);
+void label_draw (struct element *label, onion_response *res);
+void label_draw_bold (struct element *label, onion_response *res);
 
 #endif

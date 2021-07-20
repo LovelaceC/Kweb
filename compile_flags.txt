@@ -1,0 +1,6 @@
+-Wall
+-Werror
+-std=gnu99
+-Iinc
+-O0
+-g

@@ -11,12 +11,16 @@ kpage_create ()
 }
 
 void
+kpage_add_element (struct kpage *page, struct element *element)
+{
+  vector_add_element (&page->elements, element);
+}
+
+void
 kpage_add_simple_element (struct kpage *page, enum element_types type,
                           void *content)
 {
-  struct element *el;
-  el = malloc (sizeof (struct element));
-  *el = element_create (type, content);
+  struct element *el = element_create (type, content);
 
   vector_add_element (&page->elements, el);
 }
@@ -37,6 +41,7 @@ kpage_free (struct kpage *page)
     {
       // As the elements are malloc'd, they must be free'd too
       // TODO: element_free ((struct element *)page->elements.child[i]);
+      element_free (page->elements.child[i]);
       free (page->elements.child[i]);
     }
 

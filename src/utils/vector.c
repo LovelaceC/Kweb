@@ -27,6 +27,12 @@ vector_add_element (struct vector *vector, void *element)
   vector->length += 1;
 }
 
+_Bool
+vector_is_empty (struct vector *vector)
+{
+  return vector->length == 0;
+}
+
 void
 vector_free (struct vector *vector)
 {
