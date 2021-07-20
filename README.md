@@ -34,3 +34,7 @@ management, sockets, and that kind of stuff.
 - Database support.
 - File format supports (images, videos, etcetera - as it runs its own server)
 - Think about more ToDo's lmao
+- Simple form creation and management:
+  - For example: "form_create" "form_add_label" "form_add_input"
+  "form_add_button" "form_add_radio", etcetera
+- Fix regex in URLs (apparently, it doesn't work)

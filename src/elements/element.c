@@ -1,5 +1,4 @@
 #include <kweb.h>
-#include <stdlib.h>
 
 struct element *
 element_create (enum element_types type, void *content)
