@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 // Definitions go at top
 struct element;
@@ -32,6 +33,7 @@ void vector_free (struct vector *vector);
 
 // utils/file.h
 char *file_read (const char *path);
+_Bool file_exists (const char *path);
 
 // core/kweb.h
 struct kweb

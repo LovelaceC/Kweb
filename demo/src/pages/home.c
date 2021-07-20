@@ -29,6 +29,12 @@ homep (void *p, onion_request *req, onion_response *res)
 
   kpage_add_element (&page, did_you_know);
 
+  if (file_exists ("Makefile"))
+    {
+      kpage_add_simple_element (&page, ELEMENT_LABEL,
+                                "There's a `Makefile' file.");
+    }
+
   kpage_render (&page, res);
   kpage_free (&page);
 
