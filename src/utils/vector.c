@@ -36,6 +36,11 @@ vector_is_empty (struct vector *vector)
 void
 vector_free (struct vector *vector)
 {
+  if (vector_is_empty (vector))
+    {
+      return;
+    }
+
   free (vector->child);
   vector->child = NULL;
 }

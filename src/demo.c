@@ -13,13 +13,9 @@ home (void *p, onion_request *req, onion_response *res)
   struct element *el
       = element_create (ELEMENT_LABEL, "This is a label with children");
 
-  struct element *bold
-      = element_create (ELEMENT_BOLD_LABEL, " i am contained inside a label");
-  element_add_child (el, bold);
-
-  struct element *elc
-      = element_create (ELEMENT_LABEL, " i am just another child");
-  element_add_child (el, elc);
+  element_add_child_easy (el, ELEMENT_BOLD_LABEL,
+                          " i am contained inside a label");
+  element_add_child_easy (el, ELEMENT_LABEL, " i am just another child");
 
   kpage_add_element (&page, el);
 

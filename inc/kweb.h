@@ -78,6 +78,8 @@ struct element *element_create (enum element_types type, void *content);
 void element_draw (struct element *element, onion_response *res);
 void element_draw_nested (struct vector *elements, onion_response *res);
 void element_add_child (struct element *parent, struct element *child);
+void element_add_child_easy (struct element *parent, enum element_types type,
+                             void *content);
 void element_free (struct element *element);
 
 // elements/primitives/label.h

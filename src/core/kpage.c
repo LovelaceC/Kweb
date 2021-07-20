@@ -39,10 +39,12 @@ kpage_free (struct kpage *page)
 {
   for (int i = 0; i < page->elements.length; i++)
     {
-      // As the elements are malloc'd, they must be free'd too
-      // TODO: element_free ((struct element *)page->elements.child[i]);
+      // Free children
       element_free (page->elements.child[i]);
+
+      // As the elements are malloc'd, they must be free'd too
       free (page->elements.child[i]);
+      page->elements.child[i] = NULL;
     }
 
   // Finally, free the space allocated to store their addresses.

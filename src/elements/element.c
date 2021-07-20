@@ -1,4 +1,5 @@
 #include <kweb.h>
+#include <stdlib.h>
 
 struct element *
 element_create (enum element_types type, void *content)
@@ -49,8 +50,24 @@ element_add_child (struct element *parent, struct element *child)
 }
 
 void
+element_add_child_easy (struct element *parent, enum element_types type,
+                        void *content)
+{
+  struct element *el = element_create (type, content);
+  element_add_child (parent, el);
+}
+
+void
 element_free (struct element *element)
 {
+  for (int i = 0; i < element->children.length; i++)
+    {
+      element_free (element->children.child[i]);
+
+      free (element->children.child[i]);
+      element->children.child[i] = NULL;
+    }
+
   vector_free (&element->children);
   element->parent = NULL;
   element->content = NULL;
