@@ -30,6 +30,9 @@ void vector_add_element (struct vector *vector, void *element);
 _Bool vector_is_empty (struct vector *vector);
 void vector_free (struct vector *vector);
 
+// utils/file.h
+char *file_read (const char *path);
+
 // core/kweb.h
 struct kweb
 {
@@ -54,6 +57,7 @@ void kpage_add_element (struct kpage *page, struct element *element);
 void kpage_add_simple_element (struct kpage *page, enum element_types type,
                                void *content);
 void kpage_render (struct kpage *page, onion_response *res);
+const char *kpage_get_path (onion_request *req);
 void kpage_free (struct kpage *page);
 
 // elements/element.h

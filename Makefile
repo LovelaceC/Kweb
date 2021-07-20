@@ -3,7 +3,7 @@ LIBS=-lonion
 
 FILES=build/demo.o build/core/kweb.o build/elements/primitives/label.o \
 	build/utils/vector.o build/core/kpage.o build/elements/element.o \
-	build/elements/primitives/division.o
+	build/elements/primitives/division.o build/utils/file.o
 OUT=bin/server
 
 all: $(FILES)
@@ -28,6 +28,9 @@ build/elements/element.o: src/elements/element.c
 	$(CC) $(FLAGS) $< -c -o $@ $(LIBS)
 
 build/elements/primitives/division.o: src/elements/primitives/division.c
+	$(CC) $(FLAGS) $< -c -o $@ $(LIBS)
+
+build/utils/file.o: src/utils/file.c
 	$(CC) $(FLAGS) $< -c -o $@ $(LIBS)
 
 run: all

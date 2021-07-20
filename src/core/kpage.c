@@ -34,6 +34,14 @@ kpage_render (struct kpage *page, onion_response *res)
     }
 }
 
+const char *
+kpage_get_path (onion_request *req)
+{
+  const char *path = onion_request_get_fullpath (req);
+  path += 1;
+  return path;
+}
+
 void
 kpage_free (struct kpage *page)
 {
