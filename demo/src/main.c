@@ -1,6 +1,6 @@
 #include <kweb.h>
 
-#include "pages/home.h"
+#include "pages.h"
 
 int
 main ()

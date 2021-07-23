@@ -23,10 +23,6 @@ A simple demo will run, you can visit it going to localhost:8080
 I literally started working on this today (Jul 19 01:57:48 2021) and it barely
 has stuff, I am really looking forward to make this grow and more usable.
 
-- Page meta (name, author, description, language, etcetera - could be done
-through a META element?)
-- Classes and IDs for elements
-- Support for styles (CSS)
 - More elements. So far it only supports labels
 - Documentation
 - Abstractions for certain useful functionalities, such as filesystem
@@ -37,4 +33,4 @@ management, sockets, and that kind of stuff.
 - Simple form creation and management:
   - For example: "form_create" "form_add_label" "form_add_input"
   "form_add_button" "form_add_radio", etcetera
-- Fix regex in URLs (apparently, it doesn't work)
+- Simple GET/POST support
