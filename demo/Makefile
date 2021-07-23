@@ -2,7 +2,7 @@ FLAGS=-Wall -Werror -std=gnu99 -I../inc -O0 -g -L../bin
 LIBS=-lkweb
 
 FILES=build/main.o build/pages/home.o
-OUT=bin/demo
+OUT=bin/demo.o
 
 all: $(FILES)
 	$(CC) $(FLAGS) $(FILES) -o $(OUT) $(LIBS)

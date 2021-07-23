@@ -1,7 +1,9 @@
 #ifndef __KWEB_H
 #define __KWEB_H
 
+#include <onion/dict.h>
 #include <onion/log.h>
+#include <onion/mime.h>
 #include <onion/onion.h>
 #include <onion/types.h>
 #include <onion/version.h>
@@ -49,13 +51,30 @@ void kweb_add_page (struct kweb *k, const char *regex, void *fptr);
 void kweb_listen (struct kweb *k);
 
 // core/kpage.h
+struct kpage_meta
+{
+  char *title;
+  char *description;
+  char *author;
+};
+
 struct kpage
 {
   struct vector elements;
+
+  struct vector styles;
+  struct vector scripts;
+
+  struct kpage_meta meta;
 };
 
 struct kpage kpage_create ();
+void kpage_set_meta (struct kpage *page, char *page_title,
+                     char *page_description, char *page_author);
+
 void kpage_add_element (struct kpage *page, struct element *element);
+void kpage_add_style (struct kpage *page, const char *scr_path);
+
 void kpage_add_simple_element (struct kpage *page, enum element_types type,
                                void *content);
 void kpage_render (struct kpage *page, onion_response *res);

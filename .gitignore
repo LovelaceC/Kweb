@@ -4,3 +4,4 @@
 a.out
 kweb.o
 bin/libkweb.so
+demo.o

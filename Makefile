@@ -12,7 +12,7 @@ NOCOLOR=\033[0m
 
 all: $(FILES)
 	$(CC) -shared $(FLAGS) $(FILES) -o $(OUT) $(LIBS) -lc
-	echo -e "[ ${GREEN}DONE${NOCOLOR} ] Building kweb"
+	@echo "[ ${GREEN}DONE${NOCOLOR} ] Building kweb"
 
 build/core/kweb.o: src/core/kweb.c
 	$(CC) $(FLAGS) $< -c -o $@ $(LIBS)
@@ -40,7 +40,7 @@ build/elements/primitives/list.o: src/elements/primitives/list.c
 
 build_demo: all
 	cd demo && $(MAKE)
-	echo -e "[ ${GREEN}DONE${NOCOLOR} ] Building the demo"
+	@echo "[ ${GREEN}DONE${NOCOLOR} ] Building the demo"
 
 run_demo: build_demo
 	cd demo && $(MAKE) run
