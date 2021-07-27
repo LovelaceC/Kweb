@@ -71,7 +71,9 @@ element_set_class (struct element *element, const char *class)
 {
   // Should kweb just not allocate memory?
   size_t class_len = strlen (class);
-  element->class = malloc (sizeof (char) * class_len);
+  element->class = malloc (sizeof (char) * class_len + 1);
+  memset (element->class, 0, sizeof (char) * class_len + 1);
+
   strncpy (element->class, class, class_len);
 }
 
@@ -80,7 +82,9 @@ element_set_id (struct element *element, const char *id)
 {
   // Should kweb just not allocate memory?
   size_t id_len = strlen (id);
-  element->id = malloc (sizeof (char) * id_len);
+  element->id = malloc (sizeof (char) * id_len + 1);
+  memset (element->id, 0, sizeof (char) * id_len + 1);
+
   strncpy (element->id, id, id_len);
 }
 
